@@ -9,25 +9,19 @@
   endif
 -%}
 <html lang="{{ request.locale.iso_code }}" dir="{{ lang_dir }}">
-<head>
-
-
+  <head>
+  {% render 'header_file' %}
   <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://ss.frankster.com.au/cgnrxtzd.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T7CLRVL5');</script>
-<!-- End Google Tag Manager -->
+  <script type="lazyload_js">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://ss.frankster.com.au/cgnrxtzd.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T7CLRVL5');</script>
+  <!-- End Google Tag Manager -->
   
-
-
-  
-
   {% render 'ultimate-datalayer' %}
+  {% include 'kiwiSizing' %} 
   
-{% include 'kiwiSizing' %} 
   <!-- Symmetry 6.0.3 -->
-
-<meta name="facebook-domain-verification" content="3emaj4iutu2fr2f9fldg9tifhpwfj0" />
-  
-<title>
+  <meta name="facebook-domain-verification" content="3emaj4iutu2fr2f9fldg9tifhpwfj0" />
+    
+  <title>
     {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
   </title>
 
@@ -59,7 +53,8 @@
 
   {% render 'social-meta-tags' %}
 
-  {{ 'styles.css' | asset_url | stylesheet_tag: preload: true }}
+  {% render 'theme-css' %}  
+  <link data-href="{{ 'styles.css' | asset_url }}" rel="stylesheet" />
 
   {%- if settings.custom_theme_css != blank -%}
     {{ 'custom.css' | asset_url | stylesheet_tag: preload: true }}
@@ -118,24 +113,30 @@
     document.documentElement.classList.add('js');
   </script>
 
-  <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  	<script type="lazyload_js" data-src="{{ 'vendor.min.js' | asset_url }}"></script>
+    <script type="lazyload_js" data-src="{{ 'theme.js' | asset_url }}"></script>	
 
-  {%- if tinyscript -%}{{ content_for_header }}{%- else -%}{% render 'tiny-script-control' %}{%- endif -%}
+    {%- if request.design_mode or template contains 'cart' or template contains 'checkout' -%}
+            {{ content_for_header }}
+    {%- else -%}
+            {% capture content_for_header2 %}{{ content_for_header }}{% endcapture %}
+            {{ content_for_header2 | replace: ' defer="defer" ', ' type="lazyload_js" ' | replace: " src=", " data-src="| replace: "DOMContentLoaded", "appco-DOMContentLoaded" | replace: "window.addEventListener('load', asyncLoad, false);", "window.addEventListener('appco-DOMContentLoaded', asyncLoad, false);" | replace: "addEventListener('load', prefetchAssets);", "addEventListener('appco-DOMContentLoaded', prefetchAssets);" }}
+            <script>var trekkie=[];trekkie.integrations=!0;window.BOOMR={},window.BOOMR.version=true;</script>
+    {%- endif -%}
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "icaqwk02tq");
-</script>
-
-{% render 'twitter-card' %}
-
-
-{% render 'gsf-conversion-pixels' %}
-
+  <script type="lazyload_js">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "icaqwk02tq");
+  </script>
+  
+  {% render 'twitter-card' %}
+  {% render 'gsf-conversion-pixels' %}
+  {% render 'custom-css' %} 
+  {% render 'judgeme_core' %}    
+  {% render 'app-block' %}  
 </head>
 
 <body class="{{ page.handle }} template-{{ template | split: '.' | first | handle }}
@@ -143,12 +144,10 @@
     {%- if settings.swatch_enabled %} swatch-method-{{ settings.swatch_method }} swatch-style-{{ settings.swatch_style }}{% endif -%}
     " data-cc-animate-timeout="0">
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://ss.frankster.com.au/ns.html?id=GTM-T7CLRVL5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://ss.frankster.com.au/ns.html?id=GTM-T7CLRVL5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
   
-  
-
   {%- if settings.animations_enabled_desktop -%}
     <script>
       if ('IntersectionObserver' in window) {
@@ -165,19 +164,18 @@
   {% section 'store-messages' %}
 
   <main id="content" role="main">
-    <div class="container cf">
-
+    <div class="container cf"
       {{ content_for_layout }}
-
-    </div><!-- /.container -->
-  </main><!-- /#content -->
+    </div>
+    <!-- /.container -->
+  </main>
+  <!-- /#content -->
 
   {%- if request.path != '/challenge' -%}
     <div id="pagefooter">
       {% section 'cross-page-promos' %}
       {% section 'footer' %}
     </div>
-
     {% section 'popup' %}
   {%- endif -%}
 
@@ -196,8 +194,9 @@
       </added-notification>
     </template>
   {%- endif -%}
-
-
-<script src="https://app.kiwisizing.com/web/js/dist/kiwiSizing/plugin/SizingPlugin.prod.js?v=310&shop=frankster-4506.myshopify.com"></script>
+  
+<script type="lazyload_js" data-src="https://app.kiwisizing.com/web/js/dist/kiwiSizing/plugin/SizingPlugin.prod.js?v=310&shop=frankster-4506.myshopify.com"></script>
+  {% render 'footer_file' %}
+  {% render 'footer-app-block' %}  
 </body>
 </html>

@@ -1,0 +1,88 @@
+<style>
+.cc-animate-enabled [data-cc-animate] {
+    opacity: 1 !important;
+}
+
+.rimage-background.fade-in {
+    opacity: 1 !important;
+}
+
+.rimage-wrapper .rimage__image.fade-in {
+    opacity: 1 !important;
+}
+
+.template-index main#content .slideshow  .rimage-background-wrapper .rimage-outer-wrapper {
+    transform: scale(1) !important;
+}
+
+@media(min-width:768px){
+[data-section-type="main-product"] {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+[data-section-type="blog-template"]{
+    padding-top: 50px;
+}
+
+.about-us main .shopify-section:not(:has(.fully-spaced-row--medium)) {
+    margin-top: 80px;
+}  
+}
+</style>
+
+{% if canonical_url contains '/pages/delivery-returns' or canonical_url contains '/pages/size-chart' %}
+
+<style>
+@media(min-width:768px){
+main#content {
+     padding-top: 50px;
+     padding-bottom: 50px;
+}
+}
+</style>  
+
+{% endif %}
+
+{% if canonical_url contains '/pages/contact' %}
+
+<style>
+@media(min-width:768px){
+main#content {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 32px !important;
+    max-width: 1000px !important;
+    margin: 0 auto;
+}
+
+.cf {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 0px !important;
+    max-width: 0px !important;
+    margin: unset !important;
+    width: 34% !important;
+}
+
+.cf > div:first-child {
+    width: 100% !important;
+}
+}
+</style>  
+
+{% endif %}
+
+{% if template contains 'index' or template contains 'collection' or template contains 'product' %}
+  
+{% else %}
+.strongly-spaced-row, .fully-spaced-row--medium {
+    margin-bottom: 0 !important;
+}			
+{% endif %}

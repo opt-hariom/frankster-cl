@@ -5,7 +5,7 @@
   {% case media.media_type %}
     {% when 'image' %}
       <div class="product-media product-media--image">
-        {% render 'responsive-image', image: media.preview_image, min_aspect_ratio: min_aspect_ratio %}
+        {% render 'responsive-image-product', image: media.preview_image, min_aspect_ratio: min_aspect_ratio %}
       </div>
     {% when 'external_video', 'video' %}
       <div class="product-media product-media--video product-media--frame"

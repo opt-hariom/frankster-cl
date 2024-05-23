@@ -73,6 +73,7 @@
         {%- else -%}
           <div class="rimage-background-wrapper lazyload--placeholder {% if block.settings.mobile_image != blank %}desktop-only{% endif %}">
             <div class="rimage-outer-wrapper rimage-background lazyload--manual fade-in{% if section.settings.height == 'fixed' %} fixed-height-item{% endif %}"
+                style="background-image:url({{ block.settings.image | img_url: '1524x' }})"
                 data-bgset="{% render 'bgset', image: block.settings.image %}"
                 data-sizes="auto"
                 data-parent-fit="cover"
@@ -91,6 +92,7 @@
 
           {% if block.settings.mobile_image != blank %}
             <div class="rimage-outer-wrapper rimage-background lazyload--manual mobile-only fade-in{% if section.settings.height == 'fixed' %} fixed-height-item{% endif %}"
+                 style="background-image:url({{ block.settings.mobile_image | img_url: '480x' }})"
                  data-bgset="{% render 'bgset', image: block.settings.mobile_image %}"
                  data-sizes="auto"
                  data-parent-fit="cover"

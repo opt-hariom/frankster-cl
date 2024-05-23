@@ -97,7 +97,7 @@
           <div class="thumbnails{% unless section.settings.gallery_layout contains 'carousel' %} mobile-only{% endunless %}">
             {% for media in product.media %}
               <a class="thumbnail thumbnail--media-{{ media.media_type }}" href="{% if section.settings.enable_zoom %}{{ media.preview_image | img_url: zoom_size }}{% else %}#{% endif %}" data-media-id="{{ media.id }}">
-                {% render 'responsive-image', image: media.preview_image, min_aspect_ratio: min_aspect_ratio %}
+                {% render 'responsive-image-thumb', image: media.preview_image, min_aspect_ratio: min_aspect_ratio %}
 
                 {%- if media.media_type == 'video' or media.media_type =='external_video' -%}
                   <div class="thumbnail__badge">

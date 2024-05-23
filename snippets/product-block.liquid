@@ -34,7 +34,7 @@
               <div>
                 {%- if show_hover_image -%}
                   <div class="product-block__image product-block__image--primary{% if product.featured_media.id == product.media.first.id %}{% assign active_media_found = true %} product-block__image--active{% endif %}{% if product_images.last.id == product.featured_media.id %} product-block__image--show-on-hover{% endif %}" data-media-id="{{ product.media.first.id }}">
-                    {%- render 'responsive-image', image: product.media.first.preview_image, manual_image_load: manual_image_load, min_aspect_ratio: 0.6, aspect_ratio: custom_aspect_ratio, no_max_width: true, cover: settings.prod_thumb_crop -%}
+                    {%- render 'responsive-image-card', image: product.media.first.preview_image, manual_image_load: manual_image_load, min_aspect_ratio: 0.6, aspect_ratio: custom_aspect_ratio, no_max_width: true, cover: settings.prod_thumb_crop -%}
                   </div>
                   {%- for media in product_images offset: 1 -%}
                     {%- liquid
